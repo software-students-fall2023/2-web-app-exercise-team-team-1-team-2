@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+Allow users to share their thoughts and experiences on a mobile web blog, enhancing their experience with organizational tools that allow for editing, deleting, and searching for specific blog posts.
 
 ## User stories
 
