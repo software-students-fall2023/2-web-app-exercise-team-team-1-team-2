@@ -23,7 +23,7 @@ Acceptance criteria:
 3. Relevant post is displayed in descending order of date posted.
 
 #### As a user, I want to edit some posts so that I can fix errors.  
-Estimation of effort: L
+Estimation of effort: L  
 Acceptance criteria:  
 1. User has the option to edit posts displayed on each post.
 2. User enters changes into a form.
