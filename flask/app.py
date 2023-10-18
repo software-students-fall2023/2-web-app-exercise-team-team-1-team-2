@@ -42,7 +42,7 @@ def home():
     # Convert object IDs to base62 (for hrefs)
     for article in articles:
         article["_id"] = b64tob62(article["_id"])
-    return render_template("index.html", articles=articles)
+    return render_template("display1.html", articles=articles)
 
 
 # Takes: object id (_id) in base62
