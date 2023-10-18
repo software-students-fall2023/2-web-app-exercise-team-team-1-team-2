@@ -6,6 +6,7 @@ import os
 import pymongo
 import base64
 import base62
+import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
 load_dotenv()
@@ -55,7 +56,16 @@ def article(id_b62):
     else:
         return render_template('display2.html', article=article)
 
-# TODO: Implement other routes
+# TODO: Implement article writing page @ /submit
+
+# TODO: Receive POST @ /submit_blog, containing article.title, article.content, automatically generate article.date
+
+# TODO: Implement edit article page @ /edit/<id_b62>,
+
+# TODO: Receive POST @ /submit_edit, containing article.title, article.content, article.date, article.id
+
+# TODO: Implement delete article page @ /delete/<id_b62>
+
 
 if __name__ == '__main__':
     main()
