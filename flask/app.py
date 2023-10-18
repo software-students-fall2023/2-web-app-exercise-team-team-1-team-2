@@ -1,6 +1,6 @@
 from flask import Flask, render_template, abort, request, redirect
 
-app = Flask(__name__, template_folder = "../")
+app = Flask(__name__, template_folder = "../html")
 
 import os
 import pymongo
@@ -42,7 +42,7 @@ def home():
     # Convert object IDs to base62 (for hrefs)
     for article in articles:
         article["_id"] = oidtob62(article["_id"])
-    return render_template("html/display1.html", articles=articles)
+    return render_template("display1.html", articles=articles)
 
 
 # Takes: object id (_id) in base62
@@ -91,7 +91,7 @@ def edit(id_b62):
     if article is None:
         abort(404)
     else:
-        return render_template("html/edit.html", article=article)
+        return render_template("edit.html", article=article)
 
 
 # Receive edit form
@@ -125,7 +125,7 @@ def delete(id_b62):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("html/404.html"), 404
+    return render_template("404.html"), 404
 
 
 if __name__ == "__main__":
