@@ -16,8 +16,9 @@ b64tob62 = lambda b64: base62.encodebytes(base64.b64decode(b64)).decode('utf-8')
 b62tob64 = lambda b62: base64.b64encode(base62.decodebytes(b62.encode('utf-8'))).decode('utf-8')
 
 def main():
-    # Connect to MongoDB Atlas (blocked on credentials)
-    client = pymongo.MongoClient("mongodb+srv://projectuser:erickmichealahmedhenry@cluster0.12ybrgp.mongodb.net/?retryWrites=true&w=majority")
+    # Connect to MongoDB Atlas
+    mongo_uri = os.environ.get ( 'MONGO_URI' )
+    client = pymongo.MongoClient ( mongo_uri )
     # db = client.test
 
     # Trying to connect to database
@@ -27,7 +28,7 @@ def main():
         collection = db [ "User_Posts" ]
         print ( 'Connected!')
     except Exception as e:
-        print ( 'Failed to connect at', "mongodb+srv://projectuser:erickmichealahmedhenry@cluster0.12ybrgp.mongodb.net/?retryWrites=true&w=majority" )
+        print ( 'Failed to connect at ', mongo_uri )
         print ( 'Database connection error', e )
     db = client.test
     # Run Flask app on port 8080, localhost (we don't have any plans to put this on the Internet)
