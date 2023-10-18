@@ -9,6 +9,7 @@ import base62
 import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from werkzeug.exceptions import HTTPException
 load_dotenv()
 
 # object ID helper functions
@@ -67,6 +68,10 @@ def article(id_b62):
 
 # TODO: Implement delete article page @ /delete/<id_b62>
 
+# Handle generic
+@app.errorhandler ( EXCEPTION )
+def handle_error ( e ):
+    return render_template ( 'error.html', error = e )
 
 if __name__ == '__main__':
     main()
