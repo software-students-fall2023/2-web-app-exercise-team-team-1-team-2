@@ -4,7 +4,6 @@ app = Flask(__name__, template_folder = "../")
 
 import os
 import pymongo
-import base64
 import base62
 import datetime
 from pymongo import MongoClient
@@ -13,9 +12,9 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv(), override=True)
 
-# object ID helper functions
-b64tob62 = lambda b64: base62.encodebytes(base64.b64decode(b64)).decode("utf-8")
-b62tob64 = lambda b62: base64.b64encode(base62.decodebytes(b62.encode("utf-8"))).decode("utf-8")
+# object ID helper functions: ObjectID() <-> base62 string
+oidtob62 = lambda oid: base62.encodebytes(oid.binary).decode("utf-8")
+b62tooid = lambda b62: pymongo.objectid.ObjectId(base62.decodebytes(b62.encode("utf-8")))
 
 def main():
     # Connect to MongoDB Atlas
@@ -42,7 +41,7 @@ def home():
     articles = db.articles.find().sort("date", pymongo.DESCENDING).limit(10)
     # Convert object IDs to base62 (for hrefs)
     for article in articles:
-        article["_id"] = b64tob62(article["_id"])
+        article["_id"] = oidtob62(article["_id"])
     return render_template("html/display1.html", articles=articles)
 
 
@@ -51,9 +50,9 @@ def home():
 @app.route("/article/<id_b62>")
 def article(id_b62):
     # Decode object ID
-    id_b64 = b62tob64(id_b62)
+    oid = b62tooid(id_b62)
     # Attempt to get article from database, return 404 if fail
-    article = db.articles.find_one({"_id": id_b64})
+    article = db.articles.find_one({"_id": oid})
     if article is None:
         abort(404)
     else:
@@ -79,7 +78,7 @@ def submit_blog():
     # Insert article into database
     result = db.articles.insert_one({"title": title, "content": content, "date": date})
     # Redirect to article page
-    return redirect("/article/" + b64tob62(result.inserted_id))
+    return redirect("/article/" + oidtob62(result.inserted_id))
 
 
 # Edit existing article form
@@ -87,8 +86,8 @@ def submit_blog():
 def edit(id_b62):
     # Prepopulate form with article.title, article.content
     # Get article from database
-    id_b64 = b62tob64(id_b62)
-    article = db.articles.find_one({"_id": id_b64})
+    oid = b62tooid(id_b62)
+    article = db.articles.find_one({"_id": oid})
     if article is None:
         abort(404)
     else:
@@ -103,10 +102,10 @@ def submit_edit():
     content = request.form["content"]
     id_b62 = request.form["id"]
     # Convert article.id to base64
-    id_b64 = b62tob64(id_b62)
+    oid = b62tooid(id_b62)
     # Update article in database
     db.articles.update_one(
-        {"_id": id_b64}, {"$set": {"title": title, "content": content}}
+        {"_id": oid}, {"$set": {"title": title, "content": content}}
     )
     # Redirect to article page
     return redirect("/article/" + id_b62)
@@ -116,10 +115,10 @@ def submit_edit():
 # Return 200 even if article doesn't exist
 @app.route("/delete/<id_b62>")
 def delete(id_b62):
-    # Convert id_b62 to id_b64
-    id_b64 = b62tob64(id_b62)
+    # Convert id_b62 to oid
+    oid = b62tooid(id_b62)
     # Delete article from database
-    db.articles.delete_one({"_id": id_b64})
+    db.articles.delete_one({"_id": oid})
     # Redirect to front page
     return redirect("/")
 
