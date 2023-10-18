@@ -58,11 +58,12 @@ def article(id_b62):
         article['date'] = article['date'].strftime('%A, %B %d %Y, %I:%M:%S %p')
         return render_template('display2.html', article=article)
 
-# TODO: Implement article writing page @ /submit
+# Submission form
 @app.route('/submit')
 def submit():
     return render_template('submit.html')
 
+# Receive submission form
 @app.route('/submit_blog', methods=['POST'])
 def submit_blog():
     # Get article.title, article.content from POST
@@ -75,11 +76,42 @@ def submit_blog():
     # Redirect to article page
     return redirect('/article/' + b64tob62(result.inserted_id))
 
-# TODO: Implement edit article page @ /edit/<id_b62>,
+# Edit existing article form
+@app.route('/edit/<id_b62>')
+def edit(id_b62):
+    # Prepopulate form with article.title, article.content
+    # Get article from database
+    id_b64 = b62tob64(id_b62)
+    article = db.articles.find_one({'_id': id_b64})
+    if article is None:
+        abort(404)
+    else:
+        return render_template('edit.html', article=article)
 
-# TODO: Receive POST @ /submit_edit, containing article.title, article.content, article.date, article.id
+# Receive edit form
+@app.route('/submit_edit', methods=['POST'])
+def submit_edit():
+    # Get article.title, article.content, article.id from POST
+    title = request.form['title']
+    content = request.form['content']
+    id_b62 = request.form['id']
+    # Convert article.id to base64
+    id_b64 = b62tob64(id_b62)
+    # Update article in database
+    db.articles.update_one({'_id': id_b64}, {'$set': {'title': title, 'content': content}})
+    # Redirect to article page
+    return redirect('/article/' + id_b62)
 
 # TODO: Implement delete article page @ /delete/<id_b62>
+# Return 200 even if article doesn't exist
+@app.route('/delete/<id_b62>')
+def delete(id_b62):
+    # Convert id_b62 to id_b64
+    id_b64 = b62tob64(id_b62)
+    # Delete article from database
+    db.articles.delete_one({'_id': id_b64})
+    # Redirect to front page
+    return redirect('/')
 
 @app.errorhandler(404)
 def page_not_found(e):
