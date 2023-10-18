@@ -17,14 +17,15 @@ def main():
     # Connect to MongoDB Atlas (blocked on credentials)
     client = pymongo.MongoClient(None)
     db = client.test
-    # TODO: Implement code to start Flask app on localhost @ tcp/8080 (HTTP)
+    # Run Flask app on port 8080, localhost (we don't have any plans to put this on the Internet)
+    app.run(host='127.0.0.1', port=8080, debug=True)
 
-# Front page, list articles
+# Front page, list at most 10 articles
 @app.route('/')
 def home():
-    # Get at most 10 articles, sorted in descending order by article.date
+    # Get articles sorted in descending order by article.date
     articles = db.articles.find().sort('date', pymongo.DESCENDING).limit(10)
-    # Convert object IDs to base62
+    # Convert object IDs to base62 (for hrefs)
     for article in articles:
         article['_id'] = b64tob62(article['_id'])
     return render_template('index.html', articles=articles)
