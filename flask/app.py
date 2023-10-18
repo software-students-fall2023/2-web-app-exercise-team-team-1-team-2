@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, redirect
 
 app = Flask(__name__)
 
@@ -19,8 +19,7 @@ def main():
     # Connect to MongoDB Atlas
     mongo_uri = os.environ.get ( 'MONGO_URI' )
     client = pymongo.MongoClient ( mongo_uri )
-    # db = client.test
-
+    global db
     # Trying to connect to database
     try:
         client.admin.command ( "ping" )
@@ -55,11 +54,26 @@ def article(id_b62):
     if article is None:
         abort(404)
     else:
+        # Convert article.date to string (e.g. Tuesday, October 17 2023, 10:00:00 PM)
+        article['date'] = article['date'].strftime('%A, %B %d %Y, %I:%M:%S %p')
         return render_template('display2.html', article=article)
 
 # TODO: Implement article writing page @ /submit
+@app.route('/submit')
+def submit():
+    return render_template('submit.html')
 
-# TODO: Receive POST @ /submit_blog, containing article.title, article.content, automatically generate article.date
+@app.route('/submit_blog', methods=['POST'])
+def submit_blog():
+    # Get article.title, article.content from POST
+    title = request.form['title']
+    content = request.form['content']
+    # Get datetime
+    date = datetime.datetime.utcnow()
+    # Insert article into database
+    result = db.articles.insert_one({'title': title, 'content': content, 'date': date})
+    # Redirect to article page
+    return redirect('/article/' + b64tob62(result.inserted_id))
 
 # TODO: Implement edit article page @ /edit/<id_b62>,
 
