@@ -1,6 +1,6 @@
 from flask import Flask, render_template, abort, request, redirect
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = "../")
 
 import os
 import pymongo
@@ -65,7 +65,7 @@ def article(id_b62):
 # Submission form
 @app.route("/submit")
 def submit():
-    return render_template("submit.html")
+    return render_template("write.html")
 
 
 # Receive submission form
