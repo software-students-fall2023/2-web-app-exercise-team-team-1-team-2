@@ -7,6 +7,7 @@ import pymongo
 import base64
 import base62
 from dotenv import load_dotenv
+from pymongo import MongoClient
 load_dotenv()
 
 # object ID helper functions
@@ -15,7 +16,7 @@ b62tob64 = lambda b62: base64.b64encode(base62.decodebytes(b62.encode('utf-8')))
 
 def main():
     # Connect to MongoDB Atlas (blocked on credentials)
-    client = pymongo.MongoClient(None)
+    client = pymongo.MongoClient("mongodb+srv://projectuser:erickmichealahmedhenry@cluster0.12ybrgp.mongodb.net/?retryWrites=true&w=majority")
     db = client.test
 
 # Front page, list articles
