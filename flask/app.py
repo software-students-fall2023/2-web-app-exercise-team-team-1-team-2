@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 
 app = Flask(__name__)
 
@@ -9,7 +9,6 @@ import base62
 import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from werkzeug.exceptions import HTTPException
 load_dotenv()
 
 # object ID helper functions
@@ -54,7 +53,7 @@ def article(id_b62):
     # Attempt to get article from database, return 404 if fail
     article = db.articles.find_one({'_id': id_b64})
     if article is None:
-        return render_template('404.html'), 404
+        abort(404)
     else:
         return render_template('display2.html', article=article)
 
@@ -68,10 +67,9 @@ def article(id_b62):
 
 # TODO: Implement delete article page @ /delete/<id_b62>
 
-# Handle generic
-@app.errorhandler ( EXCEPTION )
-def handle_error ( e ):
-    return render_template ( 'error.html', error = e )
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     main()
