@@ -8,13 +8,15 @@ import base62
 import datetime
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
+from bson.objectid import ObjectID
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv(), override=True)
 
 # object ID helper functions: ObjectID() <-> base62 string
-oidtob62 = lambda oid: base62.encodebytes(oid.binary).decode("utf-8")
-b62tooid = lambda b62: pymongo.objectid.ObjectId(base62.decodebytes(b62.encode("utf-8")))
+oidtob62 = lambda oid: base62.encodebytes(oid.binary)
+b62tooid = lambda b62: ObjectId(base62.decodebytes(b62))
+
 
 def main():
     # Connect to MongoDB Atlas
