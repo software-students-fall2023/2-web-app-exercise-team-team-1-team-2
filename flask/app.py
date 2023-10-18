@@ -28,13 +28,16 @@ def main():
     except Exception as e:
         print ( 'Failed to connect at', "mongodb+srv://projectuser:erickmichealahmedhenry@cluster0.12ybrgp.mongodb.net/?retryWrites=true&w=majority" )
         print ( 'Database connection error', e )
+    db = client.test
+    # Run Flask app on port 8080, localhost (we don't have any plans to put this on the Internet)
+    app.run(host='127.0.0.1', port=8080, debug=True)
 
-# Front page, list articles
+# Front page, list at most 10 articles
 @app.route('/')
 def home():
-    # Get at most 10 articles, sorted in descending order by article.date
+    # Get articles sorted in descending order by article.date
     articles = db.articles.find().sort('date', pymongo.DESCENDING).limit(10)
-    # Convert object IDs to base62
+    # Convert object IDs to base62 (for hrefs)
     for article in articles:
         article['_id'] = b64tob62(article['_id'])
     return render_template('index.html', articles=articles)
