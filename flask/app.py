@@ -25,7 +25,6 @@ def main():
     try:
         client.admin.command("ping")
         db = client["Cluster0"]
-        collection = db["User_Posts"]
         print("Connected!")
     except Exception as e:
         print("Failed to connect at ", mongo_uri)
