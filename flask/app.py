@@ -1,6 +1,6 @@
 from flask import Flask, render_template, abort, request, redirect
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = "../")
 
 import os
 import pymongo
