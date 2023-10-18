@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>console.blog</title>
 </head>
+
 <body>
     <header>
         <h1><a href="index.html">console.blog</a></h1>
@@ -21,19 +22,19 @@
             <a href="search.html">Search</a></li>
         </nav>
     </header>
+    <h1>{{ article.title }}</h1>
+    <p>Published on: {{ article.date }}</p>
+    <p>Published by: {{ article.author }}</p>
 
-    <h1>Edit Your Blog Post</h1>
+    <p>{{ article.content }}</p>
 
-    <form action="/submit_edit/{{ article.id }}" method="post">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="{{ article.title }}" required><br>
+    <a href="edit.html">Edit</a><br>
+    <a href="delete.html">Delete</a><br>
 
-        <label for="content">Content:</label><br>
-        <textarea id="content" name="content" rows="4" cols="50" required>{{ article.content }}</textarea><br>
+    <a href="index.html">Back to Homepage</a>
 
-        <input type="submit" value="Save Changes">
-    </form>
 
-    <a href="display1.html">Back to Homepage</a>
 </body>
+
 </html>
+
