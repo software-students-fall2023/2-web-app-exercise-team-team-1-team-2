@@ -43,11 +43,11 @@ def home():
     # Convert object IDs to base62 (for hrefs)
     for article in articles:
         article["_id"] = b64tob62(article["_id"])
-    return render_template("html/display1.html", articles=articles)
+    return render_template("html/index.html", articles=articles)
 
 
 # Takes: object id (_id) in base62
-# Renders template at /html/display2.html
+# Renders template at /html/display_1.html
 @app.route("/article/<id_b62>")
 def article(id_b62):
     # Decode object ID
@@ -59,7 +59,7 @@ def article(id_b62):
     else:
         # Convert article.date to string (e.g. Tuesday, October 17 2023, 10:00:00 PM)
         article["date"] = article["date"].strftime("%A, %B %d %Y, %I:%M:%S %p")
-        return render_template("display2.html", article=article)
+        return render_template("display_1.html", article=article)
 
 
 # Submission form
