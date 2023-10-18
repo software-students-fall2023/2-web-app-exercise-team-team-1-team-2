@@ -18,12 +18,17 @@ def main():
     # Connect to MongoDB Atlas (blocked on credentials)
     client = pymongo.MongoClient("mongodb+srv://projectuser:erickmichealahmedhenry@cluster0.12ybrgp.mongodb.net/?retryWrites=true&w=majority")
     db = client.test
+    # TODO: Implement code to start Flask app on localhost @ tcp/8080 (HTTP)
 
 # Front page, list articles
 @app.route('/')
 def home():
-    #TODO: Implement route
-    pass
+    # Get at most 10 articles, sorted in descending order by article.date
+    articles = db.articles.find().sort('date', pymongo.DESCENDING).limit(10)
+    # Convert object IDs to base62
+    for article in articles:
+        article['_id'] = b64tob62(article['_id'])
+    return render_template('index.html', articles=articles)
 
 # Takes: object id (_id) in base62
 # Renders template at /html/display2.html
@@ -38,7 +43,7 @@ def article(id_b62):
     else:
         return render_template('display2.html', article=article)
 
-#TODO: Implement other routes
+# TODO: Implement other routes
 
 if __name__ == '__main__':
     main()
