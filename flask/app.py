@@ -8,9 +8,10 @@ import base64
 import base62
 import datetime
 from pymongo import MongoClient
-from dotenv import load_dotenv
+from pymongo.server_api import ServerApi
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv(), override=True)
 
 # object ID helper functions
 b64tob62 = lambda b64: base62.encodebytes(base64.b64decode(b64)).decode("utf-8")
@@ -19,7 +20,7 @@ b62tob64 = lambda b62: base64.b64encode(base62.decodebytes(b62.encode("utf-8")))
 def main():
     # Connect to MongoDB Atlas
     mongo_uri = os.environ.get("MONGO_URI")
-    client = pymongo.MongoClient(mongo_uri)
+    client = pymongo.MongoClient(mongo_uri, server_api=ServerApi(version="1"))
     global db
     # Trying to connect to database
     try:
