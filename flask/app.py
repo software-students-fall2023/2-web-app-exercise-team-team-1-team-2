@@ -31,8 +31,8 @@ def main():
         print("Failed to connect at ", mongo_uri)
         print("Database connection error", e)
     db = client.test
-    # Run Flask app on port 8080, localhost (we don't have any plans to put this on the Internet)
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    # Run Flask app on port 5000, localhost (we don't have any plans to put this on the Internet)
+    app.run(host="127.0.0.1", port=5000, debug=True)
 
 
 # Front page, list at most 10 articles
