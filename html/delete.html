@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Your Blog Post</title>
+</head>
+<body>
+    <h1>Delete Your Blog Post</h1>
+
+    <p>Are you sure you want to delete the blog post titled "{{ article.title }}"?</p>
+
+    <form action="/submit_delete/{{ article.id }}" method="post" id="deleteForm">
+        <input type="submit" value="Yes, Delete">
+    </form>
+
+    <form action="/cancel_delete/{{ article.id }}" method="post" id="cancelForm">
+        <input type="submit" value="No, Cancel">
+    </form>
+
+    <a href="display1.html">Back to Homepage</a>
+
+    <script>
+        // JavaScript to show a confirmation dialog before submitting the delete form
+        document.getElementById("deleteForm").addEventListener("submit", function(event) {
+            var confirmation = confirm("Are you sure you want to delete this blog post? This change is permanent.");
+            if (!confirmation) {
+                event.preventDefault();  // Cancel the form submission
+            }
+        });
+    </script>
+</body>
