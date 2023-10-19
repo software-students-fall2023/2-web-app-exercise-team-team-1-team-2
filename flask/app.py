@@ -8,7 +8,7 @@ import base62
 import datetime
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
-from bson.objectid import ObjectID
+from bson.objectid import ObjectId
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv(), override=True)
