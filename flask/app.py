@@ -42,8 +42,9 @@ def home():
     # Get articles sorted in descending order by article.date
     articles = db.articles.find().sort("date", pymongo.DESCENDING).limit(10)
     # Convert object IDs to base62 (for hrefs)
+    articles = list(articles)
     for article in articles:
-        article["_id"] = oidtob62(article["_id"])
+        article["id"] = oidtob62(article["_id"]) # This is for the hrefs
     return render_template("display1.html", articles=articles)
 
 
