@@ -94,16 +94,16 @@ def edit(id_b62):
     if article is None:
         abort(404)
     else:
+        article["id"] = id_b62
         return render_template("edit.html", article=article)
 
 
 # Receive edit form
-@app.route("/submit_edit", methods=["POST"])
-def submit_edit():
+@app.route("/submit_edit/<id_b62>", methods=["POST"])
+def submit_edit(id_b62):
     # Get article.title, article.content, article.id from POST
     title = request.form["title"]
     content = request.form["content"]
-    id_b62 = request.form["id"]
     # Convert article.id to base64
     oid = b62tooid(id_b62)
     # Update article in database
