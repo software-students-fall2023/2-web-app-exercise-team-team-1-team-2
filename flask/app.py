@@ -60,6 +60,7 @@ def article(id_b62):
         abort(404)
     else:
         # Convert article.date to string (e.g. Tuesday, October 17 2023, 10:00:00 PM)
+        article["id"]=id_b62
         article["date"] = article["date"].strftime("%A, %B %d %Y, %I:%M:%S %p")
         return render_template("display2.html", article=article)
 
@@ -90,11 +91,12 @@ def edit(id_b62):
     # Prepopulate form with article.title, article.content
     # Get article from database
     oid = b62tooid(id_b62)
-    article = db.articles.find_one({"_id": oid})
+    article = dict(db.articles.find_one({"_id": oid}))
     if article is None:
         abort(404)
     else:
         article["id"] = id_b62
+        print(article["id"])
         return render_template("edit.html", article=article)
 
 
