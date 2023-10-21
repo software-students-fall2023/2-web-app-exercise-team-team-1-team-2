@@ -1,7 +1,15 @@
 # Getting Started
 
-`pip install pipenv`
+Populate your `.env` with `MONGO_URI`.
 
-If your pip is installing to places not in PATH, either add the install location of pipenv.exe (or whatever the format is) to PATH, or just prepend everything with `python -m `
+Run the following in project root to create your own venv:
 
-Connect to the pipenv with `pipenv shell` in the project root.
+`python -m venv venv-311`
+
+Enter the venv:
+
+`venv-311/Scripts/activate` (press "tab" at the end)
+
+Install dependencies:
+
+`pip install -r requirements.txt`
