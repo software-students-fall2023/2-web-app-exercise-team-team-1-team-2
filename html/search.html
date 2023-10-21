@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search results</title>
+</head>
+<body>
+    <h1>Search results:</h1>
+    <ul>
+        {% for article in articles %}
+        <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Homepage</a>
+</body>
+</html>
