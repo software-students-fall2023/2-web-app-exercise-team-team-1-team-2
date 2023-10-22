@@ -77,10 +77,11 @@ def submit_blog():
     # Get article.title, article.content from POST
     title = request.form["title"]
     content = request.form["content"]
+    author = request.form["author"]
     # Get datetime
     date = datetime.datetime.utcnow()
     # Insert article into database
-    result = db.articles.insert_one({"title": title, "content": content, "date": date})
+    result = db.articles.insert_one({"title": title, "author": author, "content": content, "date": date})
     # Redirect to article page
     return redirect("/article/" + oidtob62(result.inserted_id))
 
@@ -106,11 +107,12 @@ def submit_edit(id_b62):
     # Get article.title, article.content, article.id from POST
     title = request.form["title"]
     content = request.form["content"]
+    author = request.form["author"]
     # Convert article.id to base64
     oid = b62tooid(id_b62)
     # Update article in database
     db.articles.update_one(
-        {"_id": oid}, {"$set": {"title": title, "content": content}}
+        {"_id": oid}, {"$set": {"title": title, "author": author, "content": content}}
     )
     # Redirect to article page
     return redirect("/article/" + id_b62)
