@@ -118,8 +118,7 @@ def submit_edit(id_b62):
     return redirect("/article/" + id_b62)
 
 
-# TODO: Implement delete article page @ /delete/<id_b62>
-# Return 200 even if article doesn't exist
+# Returns 200 even if article doesn't exist
 @app.route("/delete/<id_b62>")
 def delete(id_b62):
     # Convert id_b62 to oid
@@ -128,6 +127,26 @@ def delete(id_b62):
     db.articles.delete_one({"_id": oid})
     # Redirect to front page
     return redirect("/")
+
+# Takes search query from display1.html and returns results
+@app.route("/search", methods=["GET","POST"])
+def search():
+    query = request.form["search"]
+    # Get articles by title, article content, or author in descending date order (no limit)
+    articles = db.articles.find(
+        {
+            "$or":[
+                {"title":{"$regex":query}},
+                {"content":{"$regex":query}},
+                {"author":{"$regex":query}}
+            ]
+        }
+    ).sort("date", pymongo.DESCENDING)
+    # Convert object IDs to base62 (for hrefs)
+    articles = list(articles)
+    for article in articles:
+        article["id"] = oidtob62(article["_id"])
+    return render_template("search.html", articles=articles)
 
 
 @app.errorhandler(404)
