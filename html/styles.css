@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+*{
+	background-color: whitesmoke;
+	margin: 0;
+	border: 0;
+}
+.search{
+	background: white;
+	border: 1px solid black;
+}
+#search_btn{
+	color:  aliceblue;
+	background-color:#495867 ;
+	padding: 4px;
+	margin-top: 4px;
+}
+.sub_button{
+	color:  aliceblue;
+	background-color:#495867 ;
+	padding: 4px;
+}
+
+body{
+	font-family: 'Lato', sans-serif;
+}
+
+h1{
+	color: aliceblue;
+	background-color:#495867 ;
+	padding-left: 10%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+	margin-bottom: 9%;
+}
+
+#container{
+	margin: 1.8em;
+	text-align: center;
+}
+ul{
+	margin-bottom: 3em;
+	text-align: left;
+}
+ul li{
+	list-style-type: none;
+	margin-bottom: 1em;
+	font-weight: bold;
+}
+a{
+	text-decoration: none;
+}
+
+#articles{
+	all: none;
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #495867;
+	color: white;
+	text-align: center;
+	padding: .5em;
+  }
+
+
+.link{
+background: lightgray;
+padding: 1%;
+color: black;
+
+}
+
+#all_links{
+margin-top: 70%;
+}
+
+.the_article{
+	margin-top: 10%;
+	padding: 3%;
+	background: white;
+	text-wrap: wrap;
+	font-family: 'Tahoma';
+	border: 1px solid gray;
+}
+
+#creation{
+padding: 10%;
+
+}

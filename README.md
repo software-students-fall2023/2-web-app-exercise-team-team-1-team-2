@@ -42,4 +42,5 @@ Acceptance criteria:
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Sprint 1](https://github.com/orgs/software-students-fall2023/projects/20)
+[Sprint 2](https://github.com/orgs/software-students-fall2023/projects/51)

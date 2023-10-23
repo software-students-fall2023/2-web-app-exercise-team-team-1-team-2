@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>My Blog - {{ article.title }}</title>
 </head>
 <body>
     <h1>{{ article.title }}</h1>
+    <div id="container">
     <p>Published on: {{ article.date }}</p>
     <p>Published by: {{ article.author }}</p>
 
-    <p>{{ article.content }}</p>
-
-    <a href="/">Back to Homepage</a>
-    <a href="/edit/{{ article.id }}">Edit Article</a>
-    <a href="/delete/{{ article.id }}">Delete Article</a>
+    <p class="the_article">{{ article.content }}</p>
+        <div id="all_links">
+            <a class="link" href="/">Homepage</a>
+            <a class="link" href="/edit/{{ article.id }}">Edit Article</a>
+            <a class="link" href="/delete/{{ article.id }}">Delete Article</a>
+        </div>
+</div>
+<div class="footer">
+    SWE, Fall 2023
+</div>
 </body>
 </html>
