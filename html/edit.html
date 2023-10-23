@@ -9,19 +9,23 @@
 <body>
     <h1>Edit Your Blog Post</h1>
 
-    <form action="/submit_edit/{{ article.id }}" method="post">
+    <form id="creation" action="/submit_edit/{{ article.id }}" method="post">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="{{ article.title }}" required><br>
-
+        <input class="search" type="text" id="title" name="title" value="{{ article.title }}" required><br>
+        <br>
         <label for="author">Author:</label>
-        <input type="text" id="author" name="author" value="{{ article.author }}" required><br>
-
+        <input class="search" type="text" id="author" name="author" value="{{ article.author }}" required><br>
+        <br>
         <label for="content">Content:</label><br>
-        <textarea id="content" name="content" rows="4" cols="50" required>{{ article.content }}</textarea><br>
+        <textarea class="search" id="content" name="content" rows="10" cols="40" required>{{ article.content }}</textarea><br>
 
-        <input type="submit" value="Save Changes">
+        <input class="sub_button" type="submit" value="Save Changes">
     </form>
 
-    <a href="/">Back to Homepage</a>
+    <a class="link" href="/">Homepage</a>
+
+    <div class="footer">
+        SWE, Fall 2023
+    </div>
 </body>
 </html>

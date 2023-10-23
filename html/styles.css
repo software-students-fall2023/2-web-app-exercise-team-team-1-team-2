@@ -66,10 +66,10 @@ a{
   }
 
 
-.link{
-background: lightgray;
-padding: 1%;
-color: black;
+.link, .only_homepage{
+	background: lightgray;
+	padding: 1%;
+	color: black;
 
 }
 
@@ -90,3 +90,7 @@ margin-top: 70%;
 padding: 10%;
 
 }
+ 
+.only_homepage{
+	margin-left:40%;
+} 
