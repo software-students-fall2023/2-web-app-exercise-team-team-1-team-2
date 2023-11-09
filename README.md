@@ -64,10 +64,10 @@ MONGO_URI=contents go here
 pipenv shell 
 ```
 
-4. Runs `app.py` <br>
+4. Run `app.py` <br>
 ```
 python ./flask/app.py
 ```
 
-5. Goes to the website <br>
+5. Go to the website <br>
 Open chrome and goes to [here](http://127.0.0.1:5000)
