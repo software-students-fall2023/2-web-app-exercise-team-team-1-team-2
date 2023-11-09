@@ -44,3 +44,30 @@ Acceptance criteria:
 
 [Sprint 1](https://github.com/orgs/software-students-fall2023/projects/20)
 [Sprint 2](https://github.com/orgs/software-students-fall2023/projects/51)
+
+## Set Up
+After forking and cloning, 
+1. Install `pipenv`
+```
+pip install pipenv 
+```
+
+2. Get url <br>
+Goes to [this link](https://pwpush.com/en/p/dtkmmkivjnq)
+Put the contents of this link into a file called `.env` in main directory, in the following format
+```
+MONGO_URI=contents go here
+```
+
+3. Activate the virtual environment <br>
+```
+pipenv shell 
+```
+
+4. Run `app.py` <br>
+```
+python ./flask/app.py
+```
+
+5. Go to the website <br>
+Open chrome and goes to [here](http://127.0.0.1:5000)
