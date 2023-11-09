@@ -52,22 +52,22 @@ After forking and cloning,
 pip install pipenv 
 ```
 
-2. Get url
+2. Get url <br>
 Goes to [this link](https://pwpush.com/en/p/dtkmmkivjnq)
 Put the contents of this link into a file called `.env` in main directory, in the following format
 ```
 MONGO_URI=contents go here
 ```
 
-3. Activate the virtual environment
+3. Activate the virtual environment <br>
 ```
 pipenv shell 
 ```
 
-4. Runs `app.py`
+4. Runs `app.py` <br>
 ```
 python ./flask/app.py
 ```
 
-5. Goes to the website
+5. Goes to the website <br>
 Open chrome and goes to [here](http://127.0.0.1:5000)
