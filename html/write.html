@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Write Your Own Blog</title>
+</head>
+<body>
+    <h1>Write Your Own Blog</h1>
+
+    <form id="creation" action="/submit_blog" method="post">
+        <label for="title">Title:</label>
+        <input class="search" type="text" id="title" name="title" required><br>
+        <br>
+        <label for="author">Author:</label>
+        <input  class="search" type="text" id="author" name="author" required><br>
+        <br>
+        <label for="content">Content:</label><br>
+        <textarea  class="search" id="content" name="content" rows="10" cols="40" required></textarea><br>
+
+        <input class="sub_button" type="submit" value="Submit Blog">
+    </form>
+  
+    <a class="only_homepage"href="/">Homepage</a>
+
+    <div class="footer">
+        SWE, Fall 2023
+    </div>
+</body>
+</html>
